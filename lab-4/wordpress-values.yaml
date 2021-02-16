@@ -1,0 +1,8 @@
+wordpressUsername: helm-user
+wordpressPassword: my-pass
+wordpressEmail: helm-user@example.com
+wordpressFirstName: Helm_is
+wordpressLastName: Fun
+wordpressBlogName: Learn Helm!
+service:
+  type: NodePort

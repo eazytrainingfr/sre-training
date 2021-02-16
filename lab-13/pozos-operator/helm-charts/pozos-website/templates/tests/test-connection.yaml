@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: "{{ include "pozos-website.fullname" . }}-test-connection"
+  labels:
+    {{- include "pozos-website.labels" . | nindent 4 }}
+  annotations:
+    "helm.sh/hook": test
+spec:
+  containers:
+    - name: pozos-api-test
+      image: curlimages/curl
+      args: ['{{ include "pozos-website.fullname" . }}:{{ .Values.service.port }}']
+  restartPolicy: Never

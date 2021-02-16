@@ -1,0 +1,24 @@
+# permissions for end users to edit pozoswebsites.
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: pozoswebsite-editor-role
+rules:
+- apiGroups:
+  - charts.pozos.com
+  resources:
+  - pozoswebsites
+  verbs:
+  - create
+  - delete
+  - get
+  - list
+  - patch
+  - update
+  - watch
+- apiGroups:
+  - charts.pozos.com
+  resources:
+  - pozoswebsites/status
+  verbs:
+  - get

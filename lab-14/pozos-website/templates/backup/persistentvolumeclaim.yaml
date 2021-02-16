@@ -1,0 +1,18 @@
+# we use index to get around https://github.com/helm/helm/issues/2192
+{{- if (index .Values "pozos-api" "persistence" "enabled") }}
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ index .Values "pozos-api" "fullnameOverride" }}-backup-{{ sub .Release.Revision 1 }}-{{ .Release.Name }}
+  labels:
+    {{- include "pozos-website.labels" . | nindent 4 }}
+  annotations:
+    "helm.sh/hook": pre-upgrade
+    "helm.sh/hook-weight": "0"
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: {{  index .Values "pozos-api" "persistence" "size" }}
+{{- end }}

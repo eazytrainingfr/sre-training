@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: pozos-website
+  name: pozos-website
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pozos-website
+  template:
+    metadata:
+      labels:
+        app: pozos-website
+    spec:
+      containers:
+      - image: php:apache
+        name: php
+        env:
+        - name: USERNAME
+          valueFrom:
+            secretKeyRef:
+              name: student-list-secret
+              key: username
+        - name: PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: student-list-secret
+              key: password
+        volumeMounts:
+        - name: config-volume
+          mountPath: /var/www/html 
+      volumes:
+      - name: config-volume
+        configMap:
+          name: pozos-website-config

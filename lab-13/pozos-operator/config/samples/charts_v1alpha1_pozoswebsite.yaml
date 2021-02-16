@@ -1,0 +1,89 @@
+apiVersion: charts.pozos.com/v1alpha1
+kind: PozosWebsite
+metadata:
+  name: pozoswebsite-sample
+spec:
+  # Default values copied from <project_dir>/helm-charts/pozos-website/values.yaml
+  affinity: {}
+  apiSecret:
+    password: python
+    username: toto
+  autoscaling:
+    enabled: false
+    maxReplicas: 100
+    minReplicas: 1
+    targetCPUUtilizationPercentage: 80
+  fullnameOverride: ""
+  image:
+    pullPolicy: IfNotPresent
+    repository: php
+    tag: apache
+  imagePullSecrets: []
+  ingress:
+    annotations: {}
+    enabled: false
+    hosts:
+    - host: chart-example.local
+      paths: []
+    tls: []
+  nameOverride: ""
+  nodeSelector: {}
+  podAnnotations: {}
+  podSecurityContext: {}
+  pozos-api:
+    affinity: {}
+    autoscaling:
+      enabled: false
+      maxReplicas: 100
+      minReplicas: 1
+      targetCPUUtilizationPercentage: 80
+    enabled: true
+    fullnameOverride: pozos-api
+    global: {}
+    image:
+      pullPolicy: IfNotPresent
+      repository: eazytrainingfr/pozos-api
+      tag: ""
+    imagePullSecrets: []
+    ingress:
+      annotations: {}
+      enabled: false
+      hosts:
+      - host: chart-example.local
+        paths: []
+      tls: []
+    listUrl: https://raw.githubusercontent.com/eazytrainingfr/student-list/master/simple_api/student_age2.json 
+    nameOverride: ""
+    nodeSelector: {}
+    persistence:
+      accessMode: ReadWriteOnce
+      enabled: true
+      size: 10Mi
+    podAnnotations: {}
+    podSecurityContext: {}
+    replicaCount: 1
+    resources: {}
+    securityContext: {}
+    service:
+      port: 5000
+      targetPort: 5000
+      type: ClusterIP
+    serviceAccount:
+      annotations: {}
+      create: true
+      name: ""
+    tolerations: []
+  replicaCount: 1
+  resources: {}
+  securityContext: {}
+  service:
+    nodePort: 30080
+    port: 80
+    type: NodePort
+  serviceAccount:
+    annotations: {}
+    create: true
+    name: ""
+  tolerations: []
+  
+  

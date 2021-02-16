@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: "{{ include "pozos-api.fullname" . }}-test-connection"
+  labels:
+    {{- include "pozos-api.labels" . | nindent 4 }}
+  annotations:
+    "helm.sh/hook": test
+spec:
+  containers:
+    - name: pozos-api-test 
+      image: curlimages/curl
+      command: ['sh', '-c', "curl -u toto:python -X GET http://{{ include "pozos-api.fullname" . }}:{{ .Values.service.port }}/pozos/api/v1.0/get_student_ages"]
+  restartPolicy: Never

@@ -1,0 +1,6 @@
+dependencies:
+- name: pozos-api
+  repository: https://raw.githubusercontent.com/eazytrainingfr/pozos-chart/main
+  version: 0.1.0
+digest: sha256:f600ad93f3b09e2384b127357de89414b68062821c51b320465432a3a2e61bdb
+generated: "2021-02-16T00:37:41.028128754+01:00"

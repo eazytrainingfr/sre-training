@@ -1,0 +1,32 @@
+{{- if (index .Values "pozos-api" "persistence" "enabled") }}
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: {{ include "pozos-website.fullname" . }}-restore
+  labels:
+    {{- include "pozos-website.labels" . | nindent 4 }}
+  annotations:
+    "helm.sh/hook": post-rollback 
+    "helm.sh/hook-delete-policy": before-hook-creation,hook-succeeded
+spec:
+  template:
+    spec:
+      containers:
+        - name: backup
+          image: busybox
+          command: ["/bin/sh", "-c"]
+          args: ["cp /backup/student_age.json /data/"]
+          volumeMounts:
+            - name: pozos-api-data
+              mountPath: /data
+            - name: backup
+              mountPath: /backup
+      restartPolicy: Never
+      volumes:
+        - name: pozos-api-data
+          persistentVolumeClaim:
+            claimName: {{ index .Values "pozos-api" "fullnameOverride" }}
+        - name: backup
+          persistentVolumeClaim:
+            claimName: {{ index .Values "pozos-api" "fullnameOverride" }}-backup-{{ .Release.Revision }}-{{ .Release.Name }}
+{{- end }}
