@@ -2,8 +2,10 @@
 
 ## Rajouter le repo bitnami avant l'installation de wordpress
 
+```
 helm repo add bitnami <https://charts.bitnami.com/bitnami>
 helm repo list
+```
 
 ## update version wordpress
 
