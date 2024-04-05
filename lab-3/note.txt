@@ -1,0 +1,14 @@
+LAB-3
+
+DEPLOIEMENT DE WEBSITE POZOS ET TEST
+
+1- kubectl apply -f .
+
+2- kubectl get pod
+
+3- kubectl get svc
+
+4- "Use Tunnelling Tool to access service outside the minikube_vm"
+   + Forwarded port : 30080
+   + Remote server  : $minikube_ip_enp0s8 (192.168.56.16)
+   + Remote port    : 30080
