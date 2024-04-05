@@ -1,0 +1,99 @@
+LAB-4
+
+INSTALLATION DE HELM V3
+
+1- cd sre-training/lab-2
+
+2- kubectl delete -f .
+
+3- cd ../lab-3
+
+4- kubectl delete -f .
+
+5- cd ../lab-4
+
+6- chmod 700 get_helm.sm
+
+7- ./get_helm.sh
+
+8- helm version
+
+RECHERCHE DU CHART WORDPRESS
+
+9- helm search hub wordpress
+
+10- helm search hub wordpress --max-col-width=0
+
+11- helm search hub wordpress --output yaml
+
+12- Open this url in your browser: https://artifacthub.io/packages/helm/bitnami/wordpress
+
+13- helm repo app bitnami https://charts.bitnami.com/bitnami
+
+14- helm repo add bitnami https://charts.bitnami.com/bitnami
+
+15- help search repo bitnami --output yaml
+
+16- helm repo update
+
+17- help search repo bitnami --output yaml
+
+18- helm search repo wordpress
+
+19- helm search repo wordpress --versions
+
+20- helm show readme bitnami/wordpress --version 8.1.0
+
+21- helm show values bitnami/wordpress --version 8.1.0
+
+22- helm show all bitnami/wordpress --version 8.1.0
+
+DEPLOIEMENT DU CHART WORDPRESS
+
+23- helm install wordpress bitnami/wordpress -f wordpress-values.yaml --version 8.1.0
+   #https://github.com/bitnami/charts/blob/main/bitnami/wordpress/templates/NOTES.txt
+
+24- helm ls
+
+   #after few minutes
+25- kubectl get pod
+
+ACCES A L'APPLICATION ET UPGRADE DE LA RELEASE
+
+26- Get the WordPress URL by running these commands:
+
+   export NODE_PORT=$(kubectl get --namespace {{ .Release.Namespace }} -o jsonpath="{.spec.ports[0].nodePort}" services {{ include "common.names.fullname" . }})
+   export NODE_IP=$(kubectl get nodes --namespace {{ .Release.Namespace }} -o jsonpath="{.items[0].status.addresses[0].address}")
+   echo "WordPress URL: http://$NODE_IP:$NODE_PORT/"
+   echo "WordPress Admin URL: http://$NODE_IP:$NODE_PORT/admin"
+
+27- Run the following command to get Username & Password to login on wordpress site
+
+  echo Username: {{ .Values.wordpressUsername }}
+  echo Password: $(kubectl get secret --namespace {{ .Release.Namespace }} {{ include "common.names.fullname" . }} -o jsonpath="{.data.wordpress-password}" | base64 -d)
+
+28- Open your browser and use the previous credentials to login on your blog dashboard
+
+29- Open Tunnelling Tool and configure ports:
+    + Forwarded Port: 31755
+    + Remote Server : $minikube_ip_enp0s8 (192.168.49.2)
+    + Remote Port   : 31755
+    + SSH Server    :
+    + SSH Port      : 22
+
+30- Open your Browser:
+    >> 127.0.0.1:31755
+    >> 127.0.0.1:31755/admin
+
+
+31- helm upgrade wordpress bitnami/wordpress -f wordpress-values.yaml --version 8.1.0
+
+32- kubectl get pods
+
+33- helm ls
+
+34- helm history wordpress
+
+35- helm uninstall wordpress
+
+36- helm ls
