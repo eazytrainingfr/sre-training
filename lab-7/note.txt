@@ -1,0 +1,23 @@
+LAB-7
+
+UPGRADE
+
+1- cd
+
+2- helm upgrade website pozos-website --set pozos-api.listUrl=https://raw.githubusercontent.com/eazytrainingf
+r/student-list/master/simple_api/student_age2.json
+
+3- helm ls
+
+4- kubectl get pod
+
+5- helm upgrade website pozos-website --set pozos-api.listUrl=https://raw.githubusercontent.com/eazytrainingf
+r/student-list/master/simple_api/student_age3.json
+
+6- helm history website
+
+ROLLBACK
+
+7- helm rollback website 2
+
+8- kubectl get pod
