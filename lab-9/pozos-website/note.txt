@@ -1,0 +1,67 @@
+LAB-9
+
+RESTAURATION A L'AIDE DU HOOK
+
+1- cd lab-9
+
+2- cd pozos-website/templates/
+
+3- cat restore/job.yaml
+
+4- cd ../..
+
+5- helm uninstall website
+
+6- kubectl delete pvc pozos-api-backup-1-website pozos-api-backup-2-website
+
+7- helm install website pozos-website
+
+8- kubectl get pods
+
+9- helm uninstall website
+
+10- helm install website pozos-website
+
+11- kubectl get pods
+
+12- helm uninstall website
+
+13- kubectl get pods
+
+14- kubectl get pvc
+
+15- helm ls
+
+16- helm install website pozos-website
+
+17- kubectl get pods
+
+18- helm upgrade webiste pozos-website --set pozos-api.listUrl=https://raw.githubusercontent.com/eazytrainingfr/student-list/master/simple_api/student_age2.json
+
+19- kubectl get pods
+
+20- kubectl exec -it pozos-api-xxxxxxxx-xxxx -c pozos-api -- /bin/bash
+
+21- cat /data/student_age.json
+
+22- sed -i '3d' /data/student_age.json
+
+23- exit
+
+24- cat /data/student_age.json
+
+25- helm upgrade webiste pozos-website --set pozos-api.listUrl=https://raw.githubusercontent.com/eazytrainingfr/student-list/master/simple_api/student_age3.json
+
+26- kubectl get pods
+
+27- kubectl get pvc
+
+28- helm rollback website 2
+
+29- helm ls
+
+30- helm history website
+
+31- kubectl exec -it pozos-api-xxxxxxxx-xxxx -c pozos-api -- /bin/bash
+
+32- cat /data/student_age.json
