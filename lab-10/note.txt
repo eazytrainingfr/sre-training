@@ -1,0 +1,32 @@
+LAB-10
+
+1- helm uninstall pozos-api
+
+2- helm install pozos-api pozos-api
+
+3- kubectl get pods
+
+4- helm test pozos-api
+
+5- kubectl get pod
+
+6- cd ../lab-9/
+
+7- kubectl delete pozos-api-backup-1-website pozos-api-backup-2-website
+
+8- cd ../lab-10/
+
+9- rm pozos-api-0.1.0.tgz
+
+10- helm package pozos-api
+
+11- cp pozos-api-0.1.0.tgz ~/pozos-chart/
+
+12- helm repo index ~/pozos-chart/
+
+13- cd ~/pozos-chart/
+
+14- push on github
+        + git add .
+        + git commit -m "add test on pozos-api"
+        + git push -u origin master
