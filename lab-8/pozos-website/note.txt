@@ -1,0 +1,53 @@
+LAB-8
+
+1- helm uninstall webiste
+
+backup de l’api automatiquement par helm à l’aide des hooks
+
+2- helm install website pozos-website
+
+3- kubectl get pods
+
+4- helm upgrade webiste pozos-website --set pozos-api.listUrl=https://raw.githubusercontent.com/eazytrainingfr/student-list/master/simple_api/student_age2.json
+
+5- kubectl get pods
+
+6- kubectl get svc
+
+7- helm upgrade webiste pozos-website --set pozos-api.listUrl=https://raw.githubusercontent.com/eazytrainingfr/student-list/master/simple_api/student_age3.json
+
+8- kubectl get pods
+
+9- Open in a Browser to the tunnelling tool: https://127.0.0.1:30080
+
+10- kubectl get pvc
+
+limite de l’approche de backup
+
+11- helm uninstall website
+
+12- helm install website pozos-website
+
+13- kubectl get pods
+
+14- helm upgrade webiste pozos-website --set pozos-api.listUrl=https://raw.githubusercontent.com/eazytrainingfr/student-list/master/simple_api/student_age2.json
+
+15- kubectl get pods
+
+16- kubectl exec -it pozos-api-xxxxxxxx-xxxx -c pozos-api -- /bin/bash
+
+17- sed -i "3d" /data/student_age.json
+
+18- cat /data/student_age.json
+
+19- exit
+
+20- helm upgrade webiste pozos-website --set pozos-api.listUrl=https://raw.githubusercontent.com/eazytrainingfr/student-list/master/simple_api/student_age3.json
+
+21- kubectl get pod
+
+22- kubectl get pvc
+
+23- helm rollback website 2
+
+24- kubectl get svc

@@ -1,0 +1,9 @@
+LAB-14 - MONITORING
+
+0- cd lab-14
+
+1- kubectl delete -f ../lab-13/pozos-operator/config/samples/charts_v1alpha1_pozoswebsite.yaml
+
+2- helm install website pozos-website --set metrics.enable=true --set metrics.serviceMonitor.enable=true
+
+3- kubectl get servicemonitor

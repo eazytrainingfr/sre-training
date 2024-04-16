@@ -1,0 +1,23 @@
+LAB-6
+
+RECUPERATION DE LA DEPENDANCE
+
+1- cd lab-6
+
+2- helm repo remove pozos
+
+3- helm repo add pozos https://raw.githubusercontent.com/eazytrainingfr/pozos-chart/main
+
+4- helm dependency update pozos-website
+
+DEPLOIEMENT DU WEBSITE A L'AIDE DU CHART
+
+5- helm install website pozos-website
+
+6- kubectl get pod
+
+7- helm ls
+
+8- kubectl get svc
+
+9- expose the nodeport with Tunnelling Tool & open in your browser

@@ -1,0 +1,55 @@
+LAB-1
+
+BUILD IMAGE ET PUSH
+
+#git clone https://gitlab.com/diranerpi/student-list.git
+
+1- cd student-list
+
+2- cd simple_api
+
+3- docker build -t pozos-api:0.1 .
+
+4- docker images
+ - "copy the $IMAGE_ID of the image you just build"
+
+5- docker tag $IMAGE_ID $your_dockerhub_username/pozos-api:0.1
+
+6- rm /home/$user/.docker/config.json
+
+7- docker login
+ - enter your dockerhub_username
+ - enter your dockerhub_password
+
+8- docker push $your_dockerhub_username/pozos-api:0.1
+
+9- Login on DockerHub Platform and verify that your image is present:
+    https://hub.docker.com/login
+
+TEST IMAGE
+
+10- docker run -d --name pozos-api -p 5000:5000 -v ${PWD}/student_age.json:/data/student_age.json $your_dockerhub_username/pozos-api:0.1
+
+11- docker ps
+
+12- curl -u toto:python -X GET http://127.0.0.1:5000/pozos/api/v1.0/get_student_ages
+
+13- cat student_age.json
+
+DEPLOIEMENT A L'AIDE DE DOCKER-COMPOSE
+
+#curl -SL https://github.com/docker/compose/releases/download/v2.26.1/docker-compose-linux-x86_64 -o /usr/local/bin/docker-compose
+14- sudo curl -L "https://github.com/docker/compose/releases/download/v1.28.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+  - enter your password
+
+15- sudo chmod +x /usr/local/bin/docker-compose
+
+16- docker-compose version
+
+17- go to student-list folder: lab-1/student-list
+
+18- docker rm -vf pozos-api
+
+19- docker-compose up -d
+
+20- Open in your browser: $MINIKUBE_IP_ADDRESS

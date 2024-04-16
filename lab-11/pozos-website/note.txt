@@ -1,0 +1,29 @@
+LAB-11
+
+0.1- cd lab-10/
+
+0.2- helm uninstall pozos-api
+
+1- cd lab-11/
+
+2- helm install website pozos-website
+
+3- helm test website
+
+4- kubectl logs pozos-api-test-connection
+
+5- helm uninstall website
+
+6- rm pozos-website/charts/pozos-api-0.1.0.tgz
+
+7- helm dependency update pozos-website
+
+8- helm test website
+
+9- helm install website pozos-website
+
+10- helm test website
+
+11- kubectl logs $TEST_SUITE (website-pozos-website-test-connection)
+
+12- helm test website

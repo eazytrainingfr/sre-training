@@ -1,0 +1,27 @@
+LAB-2
+
+DEPLOIEMENT DU POD POZOS-API
+
+1- Go to lab-2 folder
+
+2- kubectl apply -f pozos-api.yaml
+
+3- kubectl get pod
+
+4- kubectl apply -f pozos-api-service.yaml
+
+5- cd ../lab-1/student-list/
+
+6- docker-compsoe down -v
+
+7- cd ../../lab-2
+
+8- kubectl get pod
+
+9- kubectl get svc
+
+TEST DE L'API POZOS
+
+10- kubectl run curl-pod --image=radial/busyboxplus:curl -i -tty --rm
+
+11- curl -u toto:python -X GET http://pozos-api:5000/pozos/api/v1.0/get_student_ages

@@ -1,0 +1,43 @@
+LAB-12 DEPLOIEMENT DE PROMETHEUS OPERATOR
+
+0- cd lab-12
+
+1- helm uninstall website
+
+2- helm uninstall pozos-api
+
+3- kubectl get pvc
+
+4- kubectl delete pod website-pozos-website-test-connection pozos-api-test-connection
+
+5- kubectl get pod
+
+6- helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
+
+7- helm repo update
+
+8- helm install prometheus-operator prometheus-community/kube-prometheus-stack
+
+9- kubectl -n default get pods -l "release=prometheus-operator"
+
+10- kubectl get pod
+
+11- kubectl get prometheus
+
+12- kubectl get svc
+
+13- kubectl port-forward svc/prometheus-operator-grafana 8080:80 --address 0.0.0.0
+
+14- In another terminal, run this command:
+    kubectl port-forward svc/prometheus-operator-kube-p-prometheus 9090:90 --address 0.0.0.0
+
+15- In another terminal, run this command:
+    kubectl port-forward svc/prometheus-operator-kube-p-alertmanager 9093:9093 --address 0.0.0.0
+
+16- With tunnelling tool, open tree ports:
+    + prometheus: 8080
+    + grafana: 9093
+
+17- Open Browser: 127.0.0.1:9090 to view prometheus dashboard
+
+18- Open Browser: 127.0.0.1:8080 to view grafana dashboard (login|pass: admin|prom-operator)

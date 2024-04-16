@@ -1,0 +1,52 @@
+LAB-5 - POZOS API CHART
+
+VALUES
+
+0- cd lab-5/
+
+1- helm create pozos-api
+
+2- cd pozos-api
+
+TEST DU CHART
+
+3- helm install pozos-api pozos-api
+
+4- helm uninstall pozos-api
+
+5-a kubectl --namespace default port-forward $POD_NAME 5000:$CONTAINER_PORT --address 0.0.0.0
+    (run this command in another terminal)
+
+5-b curl -u toto:python -X GET http://127.0.0.1:5000/pozos/api/v1.0/get_student_ages"
+
+6- kubectl get svc
+
+7- kubectl get deploy
+
+MISE EN PLACE DE LA PERSISTENCE AVEC PVC
+
+8- helm install pozos-api pozos-api --set persistence.enabled=true
+
+9- kukbectl get svc
+
+PACKAGING DU CHART
+
+10- cd lab-5
+
+11- mkdir ~/pozos-chart/
+
+12- helm package pozos-api
+
+13- cp pozos-api-0.1.0.tgz ~/pozos-chart/
+
+14- helm repo index  ~/pozos-chart/
+
+15- cd  ~/pozos-chart/
+
+16- push on github
+        + git init
+        + git add .
+        + git commit -m "add pozos-api chart"
+        + git branch -M main
+        + git remote add origin $CHART_REPO_LINK
+        + git push -u origin master

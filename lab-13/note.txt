@@ -1,0 +1,33 @@
+LAB-13
+
+CREATION DE L'OPERATEUR
+
+1- cd pozos-operator
+
+2- export ARCH=$(case $(arch) in x86_x64 echo -n amd64 ;; aarch64) echo -n arm64 ;; *) echo -n $(arch) ;; esac)
+
+3- export OS=$(uname | awk '{print tolower($0)}')
+
+4- export OPERATOR_SDK_DL_URL=https://github.com/operator-framework/operator-sdk/releases/latest/download
+
+5- curl -LO ${OPERATOR_SDK_DL_URL}/operator-sdk_${OS}_${ARCH}
+
+6- chmod +x operator_sdk_${OS}_${ARCH} && sudo mv operator_sdk_${OS}_${ARCH} /usr/local/bin/operator-sdk
+
+7- cd pozos-operator
+
+8- operator-sdk init --domain pozos.com --plugins helm --helm-chart ../pozos-website
+
+DEPLOIEMENT DE L'APPLICATION POZOS A L'AIDE DE L'OPERATEUR
+
+9- make install run
+
+10- cd lab-13/pozos-operator/config/samples
+
+11- kubectl apply -f charts_v1alpha1_pozoswebsite.yaml
+
+12- kubectl get pod
+
+13- kubectl get pvc
+
+14- helm ls
